@@ -1983,7 +1983,10 @@ pars_to_monitor <- function(standata, is_jm = FALSE) {
     if (standata$prior_dist_for_cov == 2 && standata$bK1 > 0) "bCov1",
     if (standata$prior_dist_for_cov == 2 && standata$bK2 > 0) "bCov2",
     if (standata$prior_dist_for_cov == 1 && standata$len_theta_L) "theta_L",
-    "mean_PPD")
+    "mean_PPD"#,
+    #"abba"
+    
+    )
 }
 
 # Change the MCMC samples for theta_L to Sigma

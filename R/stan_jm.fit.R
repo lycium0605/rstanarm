@@ -905,7 +905,9 @@ stan_jm.fit <- function(formulaLong = NULL, dataLong = NULL, formulaEvent = NULL
   
   # call stan() to draw from posterior distribution
   stanfit <- if (is_jm) stanmodels$jm else stanmodels$mvmer
+  #stanfit<-rstan::stan_model("/Users/lycium/Desktop/Jennylab/Joint modeling /Github/Joint-modeling/rstanarm/src/stan_files/jm.stan")
   pars <- pars_to_monitor(standata, is_jm = is_jm)
+  #pars<-NA
   if (M == 1L) 
     cat("Fitting a univariate", if (is_jm) "joint" else "glmer", "model.\n\n")
   if (M  > 1L) 
@@ -986,7 +988,12 @@ stan_jm.fit <- function(formulaLong = NULL, dataLong = NULL, formulaEvent = NULL
                  if (is_jm) e_aux_nms,
                  paste0("Sigma[", Sigma_nms, "]"),
                  paste0(stub, 1:M, "|mean_PPD"), 
-                 "log-posterior")
+                 "log-posterior",
+                 "abba"
+                 # add assoc value
+                 #if (assoc["etavalue",         ][[1]]) "etavalue_assoc_long1",
+                 #if (assoc["etaauc",         ][[1]]) "etaauc_assoc_long1"
+                 )
   stanfit@sim$fnames_oi <- new_names
   
   stanfit_str <- nlist(.Data = stanfit, prior_info, y_mod, cnms, flevels)

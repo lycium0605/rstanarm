@@ -129,16 +129,25 @@ model {
                          e_prior_scale_for_intercept, e_prior_df_for_intercept);
 }
 generated quantities {
-  real e_alpha; // transformed intercept for event submodel
+  real e_alphaa; // transformed intercept for event submodel
+  real abba; // abbaabba
 
   // declares and defines: mean_PPD, yAlpha{1,2,3}, b{1,2}, bCov{1,2}
 #include /gqs/gen_quantities_mvmer.stan
 
   // norm_const is a constant shift in log baseline hazard
-  if (e_has_intercept == 1)
-    e_alpha = e_gamma[1] + norm_const -
-      dot_product(e_xbar, e_beta) - dot_product(a_xbar, a_beta .* a_scale);
-  else
-    e_alpha = norm_const -
-      dot_product(e_xbar, e_beta) - dot_product(a_xbar, a_beta .* a_scale);
+  if (e_has_intercept == 1){
+    e_alphaa = e_gamma[1] + norm_const -
+      dot_product(e_xbar, e_beta) - dot_product(a_xbar, a_beta .* a_scale);}
+  else{
+    e_alphaa = norm_const -
+      dot_product(e_xbar, e_beta) - dot_product(a_xbar, a_beta .* a_scale);}
+      
+  if (e_has_intercept == 1){
+    abba = e_gamma[1] + norm_const -
+      dot_product(e_xbar, e_beta) - dot_product(a_xbar, a_beta .* a_scale);}
+      
+  else{
+    abba = norm_const -
+      dot_product(e_xbar, e_beta) - dot_product(a_xbar, a_beta .* a_scale);}
 }
